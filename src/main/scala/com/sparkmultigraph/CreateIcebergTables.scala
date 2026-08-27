@@ -66,10 +66,6 @@ object CreateIcebergTables {
         ) USING ICEBERG
         PARTITIONED BY (bucket(16, src))
       """)
-
-    // WRITE ORDERED BY isn't valid inline in CREATE TABLE DDL for this Spark/Iceberg
-    // version -- set it as a separate table-level write-ordering directive instead.
-    // Iceberg's writers will honor this on subsequent inserts.
     spark.sql(
       s"""
         ALTER TABLE $dbName.edges
