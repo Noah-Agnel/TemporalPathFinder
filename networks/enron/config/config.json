@@ -1,0 +1,6 @@
+{
+    "maildir_path" : "/Users/noah/Desktop/temporalPathFinder/maildir",
+    "output_path"  : "../temporal_mri_import",
+    "batch_size"   : 50000,
+    "db_selection" : "mri"
+}
