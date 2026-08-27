@@ -43,7 +43,7 @@ object TablesPopulationHandler {
     **/
     def edgesTablePopulation(edgesDS: Dataset[Row]): Dataset[Row] = {
         edgesDS
-            .where(col("source_id") !== col("target_id"))   // defensive; Python layer already filters self-loops
+            .where(col("source_id") !== col("target_id"))
             .select(
                 col("edge_id"),
                 col("source_id").cast("bigint").as("src"),

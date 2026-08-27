@@ -10,9 +10,6 @@
 #
 # Node files are routed into nodesDF  via the "node" substring check.
 # Edge files are routed into edgesDF  via the absence of "node".
-#
-# "email" is no longer a node type — every email message is now
-# represented as timestamped edges between Person nodes instead.
 
 _NODE_FILE_SEGMENT = {
     "person": "person_nodes_static_props",
@@ -95,11 +92,6 @@ def _edge_to_dict(edge: dict) -> dict:
         "edge_type"   : str,
         "static_props": { "timestamp": str }
     }
-
-    static_props now carries the email's timestamp: with no Email node to
-    hold it, the send time has to live directly on the edge. It lands in
-    the edge_static_props Iceberg table as a datetime_value row keyed by
-    property_name="timestamp" — no schema change required on that side.
     """
     edge = edge.copy()
     return {

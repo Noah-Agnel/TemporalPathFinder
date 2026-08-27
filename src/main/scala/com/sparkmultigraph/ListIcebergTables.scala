@@ -17,14 +17,6 @@ object ListIcebergTables {
 
 
     try {
-      // NOTE: We do NOT gate on SHOW DATABASES / SHOW TABLES IN $dbName here.
-      // With SparkSessionCatalog + Hadoop-type catalog, namespace listing is
-      // known to be unreliable -- it can report a database/table as absent
-      // even though it exists on disk and is perfectly queryable. Relying on
-      // that check previously caused this script to bail out on a database
-      // that actually had live data in it. Instead we query the known table
-      // names directly and let a real failure (not a listing false-negative)
-      // surface as an exception.
 
       val tableNames = Array("person", "edges")
 

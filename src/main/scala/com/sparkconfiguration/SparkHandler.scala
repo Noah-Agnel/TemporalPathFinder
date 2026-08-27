@@ -10,10 +10,6 @@ object SparkHandler {
         val spark = SparkSession.builder()
         .appName(appName)
         .master("local[*]")
-
-        // --- Driver memory / result size: raised because collecting the full
-        // one-hop + two-hop adjacency to the driver for in-memory BFS can
-        // exceed the 1g defaults on larger two-hop tables ---
         .config("spark.driver.memory", "6g")
         .config("spark.driver.maxResultSize", "4g")
 

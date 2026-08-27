@@ -6,23 +6,6 @@ import com.sparkconfiguration.SparkHandler._
 
 import scala.collection.mutable
 
-/**
- * Worklist (delta-propagation) version of the corrected label-correcting reachability.
- *
- * TemporalReachabilityCorrected.scala fixed correctness by re-joining the FULL
- * bestArrival table against eligibleEdges every round. That's correct but wasteful:
- * a node whose arrival time did NOT change last round cannot possibly produce a new
- * improvement this round, since nothing about its state changed. Only nodes whose
- * arrival time improved last round need to have their outgoing edges re-explored.
- *
- * This version keeps bestArrival (full, authoritative state) separate from `worklist`
- * (only the nodes that improved in the previous round). Each round's join source is
- * `worklist`, not `bestArrival`, so join size tracks the active frontier of change
- * rather than the total node count already discovered. This is the standard
- * worklist/delta trick behind incremental Bellman-Ford-style relaxation, and it's
- * mathematically equivalent to re-joining the full table every round -- just without
- * the wasted work on nodes that can't possibly improve again this round.
- */
 object TemporalReachabilityBellmanFord {
 
   case class RoundStats(roundNum: Int, worklistSize: Long, improvedCount: Long, elapsedSeconds: Double)

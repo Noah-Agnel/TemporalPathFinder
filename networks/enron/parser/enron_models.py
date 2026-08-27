@@ -199,7 +199,7 @@ def nodes_edges_creation(
     if sender_id is None:
         return
  
-    # 2. A timestamp is required directly now (no Email node to hold it)
+    # 2. A timestamp is required directly
     if not timestamp:
         return
  
